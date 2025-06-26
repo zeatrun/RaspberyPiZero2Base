@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LED vezérlés</title>
+</head>
+<body>
+    <h1>LED vezérlés</h1>
+    <button onclick="fetch('/led?state=on')">Bekapcsolás</button>
+    <button onclick="fetch('/led?state=off')">Kikapcsolás</button>
+    <br><br>
+    <label for="brightness">Fényerő:</label>
+    <input type="range" id="brightness" min="0" max="255" onchange="setBrightness(this.value)">
+    <script>
+        function setBrightness(value) {
+            fetch('/led?brightness=' + value);
+        }
+    </script>
+</body>
+</html>
