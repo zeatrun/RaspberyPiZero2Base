@@ -28,7 +28,7 @@ set(PICO_BOARD pico2_w CACHE STRING "Board type")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(MulticoreTest C CXX ASM)
+project(RPZTwo C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
@@ -51,27 +51,27 @@ file(GLOB_RECURSE INCLUDE_DIRS
 
 # Add executable. Default name is the project name, version 0.1
 add_executable(
-    MulticoreTest 
-    MulticoreTest.c
+    RPZTwo 
+    RPZTwoMain.c
     ${PIO_SOURCES}
     ${SRC_FILES})
 
-pico_set_program_name(MulticoreTest "MulticoreTest")
-pico_set_program_version(MulticoreTest "0.1")
+pico_set_program_name(RPZTwo "MulticoreTest")
+pico_set_program_version(RPZTwo "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(MulticoreTest 0)
-pico_enable_stdio_usb(MulticoreTest 0)
+pico_enable_stdio_uart(RPZTwo 0)
+pico_enable_stdio_usb(RPZTwo 0)
 
 # Add the standard library to the build
 target_link_libraries(
-    MulticoreTest
+    RPZTwo
     pico_stdlib
     pico_multicore)
 
 # Add the standard include files to the build
 target_include_directories(
-    MulticoreTest
+    RPZTwo
     PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/generated
     ${INCLUDE_DIRS}
@@ -84,17 +84,17 @@ foreach(pio_file ${PIO_SOURCES})
     set(output_dir ${CMAKE_CURRENT_LIST_DIR}/generated)
 
     # Place PIO headers in generated folder
-    pico_generate_pio_header(MulticoreTest  ${pio_file}
+    pico_generate_pio_header(RPZTwo  ${pio_file}
         OUTPUT_DIR ${output_dir}
     )
 endforeach()
 
 # Add any user requested libraries
 target_link_libraries(
-    MulticoreTest 
+    RPZTwo 
     pico_cyw43_arch_none
     hardware_pio
     hardware_clocks)
 
-pico_add_extra_outputs(MulticoreTest)
+pico_add_extra_outputs(RPZTwo)
 
